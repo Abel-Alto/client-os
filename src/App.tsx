@@ -6,6 +6,13 @@ function App() {
 
   useEffect(() => {
     async function fetchOs() {
+      // @ts-expect-error experimental
+      if (!navigator.userAgentData) {
+        setOs("Not supported");
+        return;
+      }
+
+      // @ts-expect-error experimental
       const data = await navigator.userAgentData?.getHighEntropyValues([
         "platform",
         "platformVersion",
